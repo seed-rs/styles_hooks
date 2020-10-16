@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "seed_styles",
+    "seed_hooks",
+    "atomic_hooks",
+]

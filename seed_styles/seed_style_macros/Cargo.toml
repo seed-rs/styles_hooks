@@ -1,0 +1,29 @@
+[package]
+name = "seed_style_macros"
+version = "0.1.4"
+authors = ["rebo"]
+edition = "2018"
+autotests = false
+description = "Macros for CSS Styling for Seed web apps"
+license = "Apache-2.0 OR MIT"
+
+[lib]
+proc-macro = true
+
+[[test]]
+name = "tests"
+path = "tests/progress.rs"
+
+[dev-dependencies]
+trybuild = "1.0"
+
+[dependencies]
+syn = { version = "1.0.17",  features = ["full","extra-traits"] }
+quote = "1.0.3"
+proc-macro2 = "1.0.10"
+heck = "0.3.1"
+eager = "0.1.0"
+seed = { git = "https://github.com/seed-rs/seed", branch = "master" }
+darling = "0.10.2"
+illicit = "1.1.0"
+seed_hooks = { path = "../../seed_hooks" }
