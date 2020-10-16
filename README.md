@@ -12,7 +12,7 @@
  - You can find tutorials and documentation on [seed-style-hooks.netlify.app](https://seed-style-hooks.netlify.app/), however it's possible that some information will become obsolete.
 
  - Include chosen libraries in your Seed project this way:
-    ```rust
+    ```toml
     [dependencies]
     seed_styles = { git = "https://github.com/seed-rs/styles_hooks", package = "seed_styles", branch = "main" }
     seed_hooks = { git = "https://github.com/seed-rs/styles_hooks", package = "seed_hooks", branch = "main" }
@@ -25,3 +25,4 @@
    - Please run at least `cargo build` from the root before `push` to make sure all libraries are still compatible. We'll setup CI with tests and linters later. 
    - Use `stable` and the latest Rust version (`$ rustup update`).
    - Squash commits and try to respect [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+   - Update CHANGELOG.md.
