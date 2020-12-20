@@ -12,4 +12,7 @@ anymap = "0.12.1"
 illicit = "1.1.0"
 typemap = "0.3.3"
 atomic_hooks_macros = { path = "./macro" }
-topo = "=0.13.0"
+
+# topo = "=0.13.0"
+# topo = { path = "../../moxie/topo" }
+topo = { git = "https://github.com/MartinKavik/moxie", package = "topo", branch = "simple-mutex" }
