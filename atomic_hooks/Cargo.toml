@@ -13,6 +13,5 @@ illicit = "1.1.0"
 typemap = "0.3.3"
 atomic_hooks_macros = { path = "./macro" }
 
-# topo = "=0.13.0"
+topo = { version = "0.13.1", features = ["wasm-bindgen"] }
 # topo = { path = "../../moxie/topo" }
-topo = { git = "https://github.com/MartinKavik/moxie", package = "topo", branch = "simple-mutex" }
