@@ -617,6 +617,19 @@ impl From<CssColor> for CssBackgroundColor {
     }
 }
 
+impl From<CssColor> for CssTextDecorationColor {
+    fn from(val: CssColor) -> Self {
+        match val {
+            CssColor::Rgba(r, g, b, a) => Self::Rgba(r, g, b, a),
+            CssColor::Hsl(h, s, l) => Self::Hsl(h, s, l),
+            CssColor::Hsla(h, s, l, a) => Self::Hsla(h, s, l, a),
+            CssColor::Hex(h) => Self::Hex(h),
+            CssColor::StringValue(val) => Self::StringValue(val),
+            CssColor::Inherit => Self::Inherit,
+        }
+    }
+}
+
 impl From<CssColor> for CssFill {
     fn from(val: CssColor) -> Self {
         match val {
@@ -1226,6 +1239,12 @@ generate_froms!([
         "ColorTheme",
         "CssColor",
         "CssBackgroundColor",
+        "colors_scale"
+    ),
+    (
+        "ColorTheme",
+        "CssColor",
+        "CssTextDecorationColor",
         "colors_scale"
     ),
     ("ColorTheme", "CssColor", "CssBorderColor", "colors_scale"),
