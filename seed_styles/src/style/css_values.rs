@@ -597,6 +597,21 @@ pub enum CssTextDecoration {
 }
 
 #[derive(Display, Clone, Debug, CssStyleMacro)]
+#[display(fmt = "text-decoration-color: {};")]
+pub enum CssTextDecorationColor {
+    #[display(fmt = "rgba({},{},{},{})", _0, _1, _2, _3)]
+    Rgba(f64, f64, f64, f64),
+    #[display(fmt = "hsl({},{}%,{}%)", _0, _1, _2)]
+    Hsl(f64, f64, f64),
+    #[display(fmt = "hsla({},{}%,{}%,{})", _0, _1, _2, _3)]
+    Hsla(f64, f64, f64, f64), #[display(fmt = "#{:06x}", _0)]
+    Hex(i32),
+    StringValue(String),
+    #[display(fmt = "inherit")]
+    Inherit,
+}
+
+#[derive(Display, Clone, Debug, CssStyleMacro)]
 #[display(fmt = "text-indent: {};")]
 pub enum CssTextIndent {
     Length(ExactLength),
@@ -2568,7 +2583,6 @@ create_enums!([
     "TabSize",
     "TextAlignLast",
     "TextCombineUpright",
-    "TextDecorationColor",
     "TextDecorationLine",
     "TextDecorationStyle",
     "TextEmphasis",
