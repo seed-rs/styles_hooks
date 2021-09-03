@@ -170,7 +170,6 @@ where
                 self.render_layout(*idx_of_smallest_layout, model)
             }
         }
-    
     }
 
     pub fn set_content<F: Fn(&Mdl) -> Node<Ms> + 'static>(

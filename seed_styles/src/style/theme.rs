@@ -4,13 +4,13 @@ use crate::style::ReturnBpTuple;
 use crate::style::{CssValueTrait, Rule, Style, UpdateStyle};
 use anymap::any::Any;
 use seed::{prelude::*, *};
+use seed_hooks::atom::Atom;
 use seed_hooks::*;
 use seed_style_macros::generate_froms;
 use std::cell::RefCell;
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::marker::PhantomData;
-use seed_hooks::atom::Atom;
 
 pub trait BorderTheme: Eq + Hash + Clone {}
 pub trait BorderWidthTheme: Eq + Hash + Clone {}
@@ -34,15 +34,14 @@ thread_local! {
     static THEMES_VEC : RefCell<Vec<Theme>> = RefCell::new(vec![]);
 }
 
-
 pub fn change_theme_with_name(name: &str, theme: Theme) {
-    app_themes().update( |v|
+    app_themes().update(|v| {
         if let Some(existing_theme) = v.iter_mut().find(|t| &t.name == name) {
             let _old_theme = std::mem::replace(existing_theme, theme);
         } else {
             panic!("old theme doesnt exist");
         }
-    )
+    })
 }
 
 impl From<CssSize> for CssWidth {
@@ -1344,27 +1343,22 @@ where
     }
 }
 
-pub fn at_breakpoint_and_above<T>(bp: T) -> bool 
+pub fn at_breakpoint_and_above<T>(bp: T) -> bool
 where
-    T: BreakpointTheme + 'static,{
+    T: BreakpointTheme + 'static,
+{
     let bp_pair = with_themes(ReturnBpTuple(bp));
     match bp_pair {
-        (lower, Some(_higher)) => {
-            window()
-                .match_media(&format!("(min-width: {}px)", lower))
-                .unwrap()
-                .unwrap()
-                .matches()
-          
-        }
-        (lower, None) => {
-            window()
-                .match_media(&format!("(min-width: {}px)", lower))
-                .unwrap()
-                .unwrap()
-                .matches()
-          
-        }
+        (lower, Some(_higher)) => window()
+            .match_media(&format!("(min-width: {}px)", lower))
+            .unwrap()
+            .unwrap()
+            .matches(),
+        (lower, None) => window()
+            .match_media(&format!("(min-width: {}px)", lower))
+            .unwrap()
+            .unwrap()
+            .matches(),
     }
 }
 
@@ -1498,7 +1492,6 @@ pub trait ActOnIteratorOfThemes<R> {
 //     }
 // }
 
-
 #[atom]
 pub fn app_themes() -> Atom<Vec<Theme>> {
     vec![]
@@ -1508,13 +1501,10 @@ pub fn with_themes<Q, R>(with: Q) -> R
 where
     Q: ActOnIteratorOfThemes<R>,
 {
-    app_themes().observe_with (|v|    
-        with.call(v.iter())
-    )
+    app_themes().observe_with(|v| with.call(v.iter()))
 }
 
-
-pub fn load_app_themes(themes:&[fn()->Theme]) {
+pub fn load_app_themes(themes: &[fn() -> Theme]) {
     for theme in themes {
         app_themes().update(|t| t.push(theme()))
     }
@@ -1813,8 +1803,6 @@ impl Theme {
     {
         self.overloaded_general_lookup(alias)
     }
-
-    
 
     pub fn get<T, R>(&self, alias: T) -> Option<R>
     where
