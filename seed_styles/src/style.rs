@@ -1,5 +1,5 @@
 use derive_more::Display;
-use harsh::{Harsh, HarshBuilder};
+use harsh::{Harsh};
 use seed::{prelude::*, *};
 use seed_hooks::*;
 
@@ -44,11 +44,11 @@ thread_local! {
     pub static GLOBAL_STYLES_COUNT: Cell<u32> = Cell::new(0);
 
     pub static STYLES_USED : RefCell<HashSet<u64>> = RefCell::new(HashSet::<u64>::new());
-    pub static HASH_IDS_GENERATOR: RefCell<Harsh> = RefCell::new(HarshBuilder::new().init().unwrap());
+    pub static HASH_IDS_GENERATOR: RefCell<Harsh> = RefCell::new(Harsh::default());
 }
 
 fn short_uniq_id(id: u64) -> String {
-    HASH_IDS_GENERATOR.with(|h| h.borrow().encode(&[id]).unwrap())
+    HASH_IDS_GENERATOR.with(|h| h.borrow().encode(&[id]))
 }
 
 use objekt_clonable::*;
