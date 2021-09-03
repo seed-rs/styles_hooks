@@ -58,21 +58,19 @@ where
     }
 }
 
-
-pub trait WithGridLayout
-{
+pub trait WithGridLayout {
     fn grid(style: Style) -> Layout<NoArea>;
 }
 
-impl WithGridLayout for Layout<NoArea>
-{
+impl WithGridLayout for Layout<NoArea> {
     fn grid(style: Style) -> Layout<NoArea> {
         Layout::<NoArea> {
             areas: vec![],
             layout: vec![],
             container_styles: None,
             area_styles: HashMap::new(),
-        }.style(style)
+        }
+        .style(style)
     }
 }
 
