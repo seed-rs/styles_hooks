@@ -8,7 +8,7 @@ description = "Local state for Seed web apps"
 license = "Apache-2.0 OR MIT"
 
 [dependencies]
-seed = { git = "https://github.com/seed-rs/seed.git" branch = "master"}
+seed = { git = "https://github.com/seed-rs/seed.git", branch = "master"}
 atomic_hooks = { path = "../atomic_hooks" }
 gloo-timers = { version = "0.2.1", features = ["futures"] }
 lazy_static = "1.4.0"
