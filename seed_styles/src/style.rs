@@ -900,12 +900,7 @@ impl Keyframes {
 //         global: String,
 //     }
 
-fn add_global_init_css_to_head(
-    css: &str,
-    short_hash: &str,
-    style: &Style,
-    selector: &str,
-) {
+fn add_global_init_css_to_head(css: &str, short_hash: &str, style: &Style, selector: &str) {
     let head_elem = document().get_elements_by_tag_name("head").item(0).unwrap();
 
     let css = if !style.keyframes.frames.is_empty() {
@@ -919,12 +914,7 @@ fn add_global_init_css_to_head(
         .iter()
         .map(|c| {
             if let Combinator::Pre(c) = c {
-                format!(
-                    "{}{}{}",
-                    selector,
-                    c,
-                    style.pseudo.render()
-                )
+                format!("{}{}{}", selector, c, style.pseudo.render())
             } else {
                 String::new()
             }
@@ -978,12 +968,7 @@ fn add_global_init_css_to_head(
                 css
             ),
 
-            (None, None) => format!(
-                "\n{}{}{{\n{}}}\n",
-                selector,
-                style.pseudo.render(),
-                css
-            ),
+            (None, None) => format!("\n{}{}{{\n{}}}\n", selector, style.pseudo.render(), css),
         }
     };
 
@@ -1076,10 +1061,7 @@ fn add_global_init_css_to_head(
 
     for (media_breakpoint, rule_vec) in &style.media_rules {
         let mut media_string = String::new();
-        media_string.push_str(&format!(
-            "{}{{\n{}{{\n",
-            media_breakpoint, selector
-        ));
+        media_string.push_str(&format!("{}{{\n{}{{\n", media_breakpoint, selector));
 
         for rule in rule_vec {
             media_string.push_str(&rule.render());
@@ -1642,12 +1624,7 @@ impl GlobalStyle {
             for (selector, style) in &self.styles {
                 let rendered_css = style.render();
 
-                add_global_init_css_to_head(
-                    &rendered_css,
-                    "global_init",
-                    &style,
-                    &selector,
-                );
+                add_global_init_css_to_head(&rendered_css, "global_init", &style, &selector);
             }
         });
     }
@@ -1674,12 +1651,7 @@ impl GlobalStyle {
             for (selector, style) in &self.styles {
                 let rendered_css = style.render();
 
-                add_global_init_css_to_head(
-                    &rendered_css,
-                    &short_hash,
-                    &style,
-                    &selector,
-                );
+                add_global_init_css_to_head(&rendered_css, &short_hash, &style, &selector);
                 STYLES_USED.with(|css_set_ref| {
                     css_set_ref
                         .borrow_mut()

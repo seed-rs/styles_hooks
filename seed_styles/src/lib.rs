@@ -1,4 +1,3 @@
-
 mod style;
 
 // exports
@@ -7,7 +6,7 @@ pub use style::CssValueTrait;
 // style builder
 pub use style::s;
 
-pub use seed_style_macros::{view_macro, as_tag, process_part, process_submacro_part,*};
+pub use seed_style_macros::{as_tag, process_part, process_submacro_part, view_macro, *};
 
 #[macro_export]
 macro_rules! with_dollar_sign {
@@ -17,31 +16,31 @@ macro_rules! with_dollar_sign {
     }
 }
 
-
 // style property argument trait
 pub use style::{
-    PseudoTrait,
     // exports for Seed Layout
     composition::{default_breakpoint_theme, Composition, SeedBreakpoint, WithLayoutComposition},
-    //ro col layout
-    row_col_layout::{Row, *, Column, RowBuilder, ColumnBuilder, RowColumnArgs, RowItemArgs, ColumnItemArgs,},
-
     // Css Values
     css_values::*,
     // resizing
     helpers::conditionally_skip_rendering,
     layout::{Layout, LayoutArea, NoArea, WithGridLayout},
     // measures
-    measures::{cm, em, hsl, hsla,hsluv, hsluva, pc, px, rem, rgb, rgba, vh, vw, ExactLength},
+    measures::{cm, em, hsl, hsla, hsluv, hsluva, pc, px, rem, rgb, rgba, vh, vw, ExactLength},
     // presets
-    presets::{seed_colors, default_colors_theme},
+    presets::{default_colors_theme, seed_colors},
+    //ro col layout
+    row_col_layout::{
+        Column, ColumnBuilder, ColumnItemArgs, Row, RowBuilder, RowColumnArgs, RowItemArgs, *,
+    },
+
     theme::change_theme_with_name,
-    
-    theme::{app_themes, load_app_themes},
+
     // themes
     theme::Theme,
+    theme::{app_themes, load_app_themes},
     // themes, conditional rendering
-    theme::{except, only, only_and_above, only_and_below, at_breakpoint_and_above},
+    theme::{at_breakpoint_and_above, except, only, only_and_above, only_and_below},
     //theme alias keys
     theme::{
         BorderRadiusTheme, BorderStyleTheme, BorderTheme, BorderWidthTheme, BreakpointTheme,
@@ -52,13 +51,14 @@ pub use style::{
     // global style api
     GlobalStyle,
     // extension trait to allow Style structs to be update_el processed by seed.
-    LocalUpdateEl,LocalUpdateElForIterator,
+    LocalUpdateEl,
+    LocalUpdateElForIterator,
+    PseudoTrait,
     // Style struct,  technically user shouldn't really need to access this directly
     Style,
     // style property argument trait
     UpdateStyle,
 };
-
 
 // pub trait UpdateView<B,Ms> {
 //     fn update_view(self, builder: &mut B);

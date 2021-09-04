@@ -1,5 +1,5 @@
+use atomic_hooks::state_access::{CloneState, StateAccess};
 use seed::prelude::*;
-use atomic_hooks::state_access::{StateAccess, CloneState};
 
 pub trait StateAccessUpdateEl<T> {
     fn update_el(self, el: &mut T);

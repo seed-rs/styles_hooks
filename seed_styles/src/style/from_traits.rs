@@ -260,13 +260,11 @@ impl From<ExactLength> for CssTop {
     }
 }
 
-
 impl From<ExactLength> for CssColumnWidth {
     fn from(v: ExactLength) -> Self {
         Self::Length(v)
     }
 }
-
 
 impl From<ExactLength> for CssBottom {
     fn from(v: ExactLength) -> Self {
@@ -411,12 +409,18 @@ impl From<Percent> for CssLineHeight {
     }
 }
 
-trait ToHexColor<Q> where Q:std::fmt::LowerHex{
-    fn to_hex_color(self) ->  String;
+trait ToHexColor<Q>
+where
+    Q: std::fmt::LowerHex,
+{
+    fn to_hex_color(self) -> String;
 }
 
-impl <Q>ToHexColor<Q> for Q where Q:std::fmt::LowerHex{
-    fn to_hex_color(self) -> String{
-        format!("#{:06x}",self)
+impl<Q> ToHexColor<Q> for Q
+where
+    Q: std::fmt::LowerHex,
+{
+    fn to_hex_color(self) -> String {
+        format!("#{:06x}", self)
     }
 }
